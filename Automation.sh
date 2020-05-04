@@ -47,9 +47,6 @@ echo "Starting game!"
 sleep 2;
 am start -n com.tencent.ig/com.epicgames.ue4.SplashActivity
 sleep 4;
-tsu -c rm -rf /data/data/com.tencent.ig/app_crashrecord
-tsu -c touch /data/data/com.tencent.ig/app_crashrecord
-
 $BUSYBOX/chattr +i /data/data/com.tencent.ig/files/tss_tmp
 tsu -c rm -rf /data/data/com.tencent.ig/files/* &>/dev/null
 $BUSYBOX/chattr -i /data/data/com.tencent.ig/files/tss_tmp
