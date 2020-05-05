@@ -1,28 +1,20 @@
 #!/data/data/com.termux/files/usr/bin/bash
 COUNT=50
-BUSYBOX=/sbin/.magisk/busybox/
 Logcleaner () {
 echo "\e[1m\e[94m========================\e[0m\e[0m"
 echo "\e[1m\e[94mTCA Log Cleaner\e[0m\e[0m"
 echo "\e[1m\e[94m========================\e[0m\e[0m"
 sleep 3;
-rm -rf /data/data/com.tencent.ig/app_appcache
-rm -rf /data/data/com.tencent.ig/app_bugly
-rm -rf /data/data/com.tencent.ig/app_crashrecord
-rm -rf /data/data/com.tencent.ig/app_databases
-rm -rf /data/data/com.tencent.ig/app_geolocation
-rm -rf /data/data/com.tencent.ig/app_tbs
-rm -rf /data/data/com.tencent.ig/app_textures
-rm -rf /data/data/com.tencent.ig/app_webview
-rm -rf /data/data/com.tencent.ig/app_webview_imsdk_inner_webview
-rm -rf /data/data/com.tencent.ig/cache
-rm -rf /data/data/com.tencent.ig/code_cache
-rm -rf /storage/emulated/0/Android/data/com.tencent.ig/files/tbslog
-rm -rf /storage/emulated/0/Android/data/com.tencent.ig/cache
-rm -rf /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Logs
-rm -rf /storage/emulated/0/tencent
-rm -rf /storage/emulated/0/Tencent
-rm -rf /storage/emulated/0/.backups
+rm -rf /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Paks/puffer_temp > /dev/null 2>&1
+rm -rf /data/media/0/Android/data/com.tencent.ig/cache/*
+rm -rf /data/data/com.tencent.ig/cache/*
+rm -rf /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Pandora > /dev/null 2>&1
+rm -rf /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/PufferTmpDir > /dev/null 2>&1
+rm -rf /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/RoleInfo > /dev/null 2>&1
+rm -rf /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/RoleInfo/RoleInfo.json > /dev/null 2>&1
+rm -rf /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Screenshots > /dev/null 2>&1
+rm -rf /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/UpdateInfo > /dev/null 2>&1
+rm -rf /storage/emulated/0/Android/data/com.tencent.ig/files/ca-bundle.pem > /dev/null 2>&1
 echo "\e[1m\e[93mLogs and Trash cleared\e[0m\e[0m"
 }
 
@@ -38,24 +30,43 @@ if [ -e /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrac
 then tsu -c rm /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Paks/game_patch_0.17.0.11808.pak
 fi
 
+echo "Bypassing the Game!"
 tsu -c mkdir /storage/emulated/0/TCA/
 tsudo wget https://raw.githubusercontent.com/TeamTCA/TCA-Automation/master/mod  -O /storage/emulated/0/TCA/mod
 tsu -c cp /storage/emulated/0/TCA/mod /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Paks/game_patch_0.17.0.11808.pak
-tsu -c cp /data/data/com.tencent.ig/lib/libcubehawk.so /storage/emulated/0/TCA/
+
+tsu -c iptables -A INPUT -p tcp  --dport 2000 -j DROP &>/dev/null
+tsu -c iptables -I INPUT -s down.qq.com -j DROP &>/dev/null
+tsu -c iptables -I INPUT -s down.mtp.qq.com -j DROP &>/dev/null
+tsu -c iptables -I INPUT -s dlied1.qq.com -j DROP &>/dev/null
+tsu -c iptables -I INPUT -s dlied1.tcdn.qq.com -j DROP &>/dev/null
+tsu -c iptables -I INPUT -s intldlgs.qq.com -j DROP &>/dev/null
+tsu -c ip6tables -A INPUT -p tcp  --dport 2000 -j DROP &>/dev/null
+tsu -c ip6tables -I INPUT -s down.qq.com -j DROP &>/dev/null
+tsu -c ip6tables -I INPUT -s down.mtp.qq.com -j DROP &>/dev/null
+tsu -c ip6tables -I INPUT -s dlied1.qq.com -j DROP &>/dev/null
+tsu -c ip6tables -I INPUT -s dlied1.tcdn.qq.com -j DROP &>/dev/null
+tsu -c ip6tables -I INPUT -s intldlgs.qq.com -j DROP &>/dev/null
+
+tsu -c rm -rf /data/data/com.tencent.ig/cache/*
+tsu -c rm -rf /data/media/0/Android/data/com.tencent.ig/cache/*
+tsu -c rm -rf /data/media/0/Android/data/com.tencent.ig/files/ProgramBinaryCache/*
+tsu -c rm -rf /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/IGH5Cache/*
+tsu -c rm -rf /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Logs/*
+tsu -c rm -rf /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/PufferTmpDir/*
+
+tsu -c chmod -R 555 /data/data/com.tencent.ig/cache
+tsu -c chmod -R 555 /data/media/0/Android/data/com.tencent.ig/cache
+tsu -c chmod -R 555 /data/media/0/Android/data/com.tencent.ig/files/ProgramBinaryCache
+tsu -c chmod -R 555 /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/IGH5Cache
+tsu -c chmod -R 555 /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Logs
+tsu -c chmod -R 555 /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/PufferTmpDir
+tsu -c chmod -R 555 /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/paks
+tsu -c chmod -R 555 /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/paks/*
 
 echo "Starting game!"
 sleep 2;
 am start -n com.tencent.ig/com.epicgames.ue4.SplashActivity
-sleep 4;
-$BUSYBOX/chattr +i /data/data/com.tencent.ig/files/tss_tmp
-tsu -c rm -rf /data/data/com.tencent.ig/files/* &>/dev/null
-$BUSYBOX/chattr -i /data/data/com.tencent.ig/files/tss_tmp
-tsu -c iptables -I INPUT -s receiver.sg.tdm.qq.com -j DROP &>/dev/null
-tsu -c iptables -I INPUT -s hk.clientreport.gfm.qq.com -j DROP &>/dev/null
-tsu -c rm -rf /data/data/com.tencent.ig/lib/libcubehawk.so
-tsu -c dd if=/dev/urandom of=/data/data/com.tencent.ig/lib/libcubehawk.so bs=2400 count=7075  &> /dev/null
-tsu -c chmod -R 2777 /data/data/com.tencent.ig/*
-tsu -c chmod 2755 /data/data/com.tencent.ig/lib/*
 
 echo "DONE"
 sleep 30;
@@ -74,11 +85,15 @@ echo "Time played: $final Minutes"
 sleep 10;
 
 tsu -c rm /storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Paks/game_patch_0.17.0.11808.pak
-tsu -c rm -rf /data/data/com.tencent.ig/lib/libcubehawk.so
-tsu -c cp /storage/emulated/0/TCA/libcubehawk.so /data/data/com.tencent.ig/lib/libcubehawk.so
 tsu -c rm -rf /storage/emulated/0/TCA/
-tsu -c chmod -R 700 /data/data/com.tencent.ig/*
-tsu -c chmod 755 /data/data/com.tencent.ig/lib/*
+tsu -c chmod -R 2771 /data/data/com.tencent.ig/cache
+tsu -c chmod -R 770 /data/media/0/Android/data/com.tencent.ig/cache
+tsu -c chmod -R 770 /data/media/0/Android/data/com.tencent.ig/files/ProgramBinaryCache
+tsu -c chmod -R 770 /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/IGH5Cache
+tsu -c chmod -R 770 /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Logs
+tsu -c chmod -R 770 /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/PufferTmpDir
+tsu -c chmod -R 770 /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Paks
+tsu -c chmod -R 770 /data/media/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Paks/*
 
 echo ""
 printf "\n\n";
